@@ -1,9 +1,17 @@
 {% extends "base2.html" %}
+{% block title %}Trang chủ{% endblock %}
 {% block content %}
 <h1>Trang chủ</h1>
 {% if session.get('user') %}
-  <p>Bạn đang đăng nhập với tên <strong>{{ session['user'] }}</strong>.</p>
+  <p class="text-center">Bạn đang đăng nhập với tên <strong>{{ session['user'] }}</strong>.</p>
+  <div class="text-center">
+    <a href="{{ url_for('profile') }}" class="btn btn-primary">Xem hồ sơ</a>
+  </div>
 {% else %}
-  <p>Bạn chưa đăng nhập.</p>
+  <p class="text-center">Bạn chưa đăng nhập.</p>
+  <div class="text-center">
+    <a href="{{ url_for('login') }}" class="btn btn-primary">Đăng nhập</a>
+    <a href="{{ url_for('register') }}" class="btn btn-secondary">Đăng ký</a>
+  </div>
 {% endif %}
 {% endblock %}

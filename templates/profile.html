@@ -1,7 +1,12 @@
-
 {% extends "base2.html" %}
 {% block title %}Hồ sơ{% endblock %}
 {% block content %}
 <h1>Hồ sơ</h1>
-<p>Tên đăng nhập: <strong>{{ session['user'] }}</strong></p>
+<table class="table table-bordered">
+  <tr>
+    <th style="width: 40%">Tên đăng nhập</th>
+    <td>{{ session['user'] }}</td>
+  </tr>
+</table>
+<a href="{{ url_for('index') }}" class="btn btn-secondary">Về trang chủ</a>
 {% endblock %}
