@@ -1,0 +1,97 @@
+
+{% extends "base.html" %}
+
+{% block title %}Trang chủ{% endblock %}
+
+{% block head %}
+<style>
+    .menu-container {
+        max-width: 900px;
+        margin: 30px auto;
+        text-align: center;
+    }
+
+    .menu-container h2 {
+        color: #2563eb;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .menu-container p {
+        color: #64748b;
+        margin-bottom: 30px;
+    }
+
+    .menu-card {
+        display: block;
+        background: white;
+        padding: 30px 20px;
+        border-radius: 14px;
+        text-decoration: none;
+        color: #334155;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.07);
+        height: 100%;
+        transition: 0.2s;
+    }
+
+    .menu-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    }
+
+    .menu-icon {
+        font-size: 40px;
+        margin-bottom: 15px;
+    }
+
+    .menu-card h4 {
+        color: #2563eb;
+        font-weight: bold;
+    }
+
+    .menu-card p {
+        margin: 10px 0 0;
+        font-size: 14px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="menu-container">
+
+    <h2>ỨNG DỤNG TIỆN ÍCH</h2>
+
+    <p>Chọn chức năng bạn muốn sử dụng</p>
+
+    <div class="row g-4">
+
+        <div class="col-md-4">
+            <a href="{{ url_for('may_tinh') }}" class="menu-card">
+                <div class="menu-icon">🧮</div>
+                <h4>Máy tính</h4>
+                <p>Thực hiện các phép tính cơ bản</p>
+            </a>
+        </div>
+
+        <div class="col-md-4">
+            <a href="{{ url_for('tinh_diem') }}" class="menu-card">
+                <div class="menu-icon">📚</div>
+                <h4>Tính điểm học phần</h4>
+                <p>Tính điểm tổng kết và xếp loại</p>
+            </a>
+        </div>
+
+        <div class="col-md-4">
+            <a href="{{ url_for('bmi') }}" class="menu-card">
+                <div class="menu-icon">⚖️</div>
+                <h4>Tính BMI</h4>
+                <p>Kiểm tra chỉ số khối cơ thể</p>
+            </a>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
