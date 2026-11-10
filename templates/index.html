@@ -1,0 +1,9 @@
+{% extends "base2.html" %}
+{% block content %}
+<h1>Trang chủ</h1>
+{% if session.get('user') %}
+  <p>Bạn đang đăng nhập với tên <strong>{{ session['user'] }}</strong>.</p>
+{% else %}
+  <p>Bạn chưa đăng nhập.</p>
+{% endif %}
+{% endblock %}
