@@ -8,4 +8,4 @@ dependencies = [
 ]
 
 [tool.vercel]
-entrypoint = "app3.py"
+entrypoint = "app3:app"
