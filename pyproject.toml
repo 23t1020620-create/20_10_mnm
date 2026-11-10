@@ -1,3 +1,11 @@
 
+[project]
+name = "20-10-mnm"
+version = "1.0.0"
+requires-python = ">=3.12"
+dependencies = [
+    "Flask>=3.0.0"
+]
+
 [tool.vercel]
-entrypoint = "app3:app"
+entrypoint = "app3.py"
