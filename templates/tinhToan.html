@@ -1,0 +1,161 @@
+
+{% extends "base.html" %}
+
+{% block title %}Máy tính cơ bản{% endblock %}
+
+{% block head %}
+<style>
+    .may-tinh {
+        max-width: 460px;
+        margin: 20px auto;
+        padding: 30px;
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+    }
+
+    .may-tinh h2 {
+        text-align: center;
+        color: #2563eb;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .mo-ta {
+        text-align: center;
+        color: #64748b;
+        margin-bottom: 28px;
+        font-size: 14px;
+    }
+
+    .ket-qua {
+        color: #166534;
+        background: #f0fdf4;
+        border: 1px solid #bbf7d0;
+        border-radius: 10px;
+        padding: 16px;
+        margin-top: 22px;
+        text-align: center;
+        line-height: 1.8;
+    }
+
+    .so-ket-qua {
+        font-size: 26px;
+        font-weight: bold;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="may-tinh">
+
+    <h2>Máy tính cơ bản</h2>
+
+    <p class="mo-ta">
+        Nhập hai số và chọn phép toán cần thực hiện
+    </p>
+
+    <form method="POST" action="{{ url_for('may_tinh') }}">
+
+        <div class="nhom-nhap">
+
+            <label for="a">Số thứ nhất (a)</label>
+
+            <input
+                type="text"
+                id="a"
+                name="a"
+                value="{{ a }}"
+                placeholder="Ví dụ: 5 hoặc 2,5"
+            >
+
+            {% if loi_a %}
+                <div class="loi">{{ loi_a }}</div>
+            {% endif %}
+
+        </div>
+
+        <div class="nhom-nhap">
+
+            <label for="op">Phép toán</label>
+
+            <select id="op" name="op">
+
+                <option value="+"
+                    {% if op == '+' %}selected{% endif %}>
+                    + (Cộng)
+                </option>
+
+                <option value="-"
+                    {% if op == '-' %}selected{% endif %}>
+                    - (Trừ)
+                </option>
+
+                <option value="*"
+                    {% if op == '*' %}selected{% endif %}>
+                    * (Nhân)
+                </option>
+
+                <option value="/"
+                    {% if op == '/' %}selected{% endif %}>
+                    / (Chia)
+                </option>
+
+            </select>
+
+            {% if loi_op %}
+                <div class="loi">{{ loi_op }}</div>
+            {% endif %}
+
+        </div>
+
+        <div class="nhom-nhap">
+
+            <label for="b">Số thứ hai (b)</label>
+
+            <input
+                type="text"
+                id="b"
+                name="b"
+                value="{{ b }}"
+                placeholder="Ví dụ: 3 hoặc 4,5"
+            >
+
+            {% if loi_b %}
+                <div class="loi">{{ loi_b }}</div>
+            {% endif %}
+
+        </div>
+
+        <button type="submit" class="nut-tinh">
+            Tính toán
+        </button>
+
+    </form>
+
+    {% if ket_qua is not none %}
+
+        <div class="ket-qua">
+
+            <h5>Kết quả tính toán</h5>
+
+            <div>
+                {{ a }} {{ op }} {{ b }} =
+            </div>
+
+            <div class="so-ket-qua">
+                {{ "%.10g"|format(ket_qua) }}
+            </div>
+
+        </div>
+
+    {% endif %}
+
+    <p class="chan-trang">
+        Máy tính cơ bản
+    </p>
+
+</div>
+
+{% endblock %}

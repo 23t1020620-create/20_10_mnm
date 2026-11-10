@@ -1,0 +1,186 @@
+
+{% extends "base.html" %}
+
+{% block title %}Tính chỉ số BMI{% endblock %}
+
+{% block head %}
+<style>
+    .khung-bmi {
+        width: 100%;
+        max-width: 480px;
+        margin: 20px auto;
+        padding: 30px;
+        background: white;
+        border-radius: 14px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.07);
+    }
+
+    .khung-bmi h2 {
+        text-align: center;
+        color: #2563eb;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .mo-ta {
+        text-align: center;
+        color: #64748b;
+        font-size: 14px;
+        margin-bottom: 25px;
+    }
+
+    .ghi-chu {
+        color: #64748b;
+        font-size: 12px;
+        margin-top: 6px;
+    }
+
+    .ket-qua {
+        margin-top: 24px;
+        padding: 18px;
+        border-radius: 10px;
+        text-align: center;
+    }
+
+    .ket-qua h4 {
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+
+    .so-bmi {
+        font-size: 32px;
+        font-weight: bold;
+        margin: 8px 0;
+    }
+
+    .xanh {
+        color: #166534;
+        background: #f0fdf4;
+        border: 1px solid #86efac;
+    }
+
+    .vang {
+        color: #92400e;
+        background: #fffbeb;
+        border: 1px solid #fcd34d;
+    }
+
+    .do {
+        color: #b91c1c;
+        background: #fef2f2;
+        border: 1px solid #fca5a5;
+    }
+
+    .goi-y {
+        margin-top: 12px;
+        font-size: 14px;
+    }
+
+    @media (max-width: 480px) {
+        .khung-bmi {
+            padding: 22px 18px;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="khung-bmi">
+
+    <h2>Tính chỉ số BMI</h2>
+
+    <p class="mo-ta">
+        Nhập chiều cao và cân nặng để kiểm tra chỉ số cơ thể
+    </p>
+
+    <form method="POST" action="{{ url_for('bmi') }}">
+
+        <div class="nhom-nhap">
+
+            <label for="chieu_cao">Chiều cao (cm)</label>
+
+            <input
+                type="text"
+                id="chieu_cao"
+                name="chieu_cao"
+                value="{{ chieu_cao }}"
+                placeholder="Ví dụ: 170 hoặc 165,5"
+            >
+
+            <div class="ghi-chu">
+                Giá trị từ 50 đến 250 cm
+            </div>
+
+            {% if loi_cao %}
+                <div class="loi">{{ loi_cao }}</div>
+            {% endif %}
+
+        </div>
+
+        <div class="nhom-nhap">
+
+            <label for="can_nang">Cân nặng (kg)</label>
+
+            <input
+                type="text"
+                id="can_nang"
+                name="can_nang"
+                value="{{ can_nang }}"
+                placeholder="Ví dụ: 65 hoặc 65,5"
+            >
+
+            <div class="ghi-chu">
+                Giá trị từ 10 đến 300 kg
+            </div>
+
+            {% if loi_nang %}
+                <div class="loi">{{ loi_nang }}</div>
+            {% endif %}
+
+        </div>
+
+        <button type="submit" class="nut-tinh">
+            Tính chỉ số BMI
+        </button>
+
+    </form>
+
+    {% if bmi_value is not none %}
+
+        <div class="ket-qua {{ mau }}">
+
+            <h4>Kết quả BMI</h4>
+
+            <div>Chỉ số BMI của bạn</div>
+
+            <div class="so-bmi">
+                {{ "%.1f"|format(bmi_value) }}
+            </div>
+
+            <div>
+                Phân loại:
+                <strong>{{ phan_loai }}</strong>
+            </div>
+
+            <div class="goi-y">
+
+                Cân nặng tham khảo để có BMI từ 18,5 đến 22,9:
+
+                <br>
+
+                <strong>{{ can_nang_goi_y }}</strong>
+
+            </div>
+
+        </div>
+
+    {% endif %}
+
+    <p class="chan-trang">
+        Công cụ kiểm tra chỉ số BMI
+    </p>
+
+</div>
+
+{% endblock %}

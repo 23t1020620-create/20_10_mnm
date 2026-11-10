@@ -1,0 +1,179 @@
+
+{% extends "base.html" %}
+
+{% block title %}Tính điểm học phần{% endblock %}
+
+{% block head %}
+<style>
+    .container-diem {
+        width: 100%;
+        max-width: 480px;
+        margin: 20px auto;
+        padding: 30px;
+        background: white;
+        border-radius: 14px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.07);
+    }
+
+    .container-diem h2 {
+        text-align: center;
+        color: #2563eb;
+        font-size: 26px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .mo-ta {
+        text-align: center;
+        color: #64748b;
+        font-size: 14px;
+        margin-bottom: 28px;
+    }
+
+    .ghi-chu {
+        color: #64748b;
+        font-size: 12px;
+        margin-top: 6px;
+    }
+
+    .ket-qua {
+        margin-top: 24px;
+        padding: 18px;
+        text-align: center;
+        background: #f0fdf4;
+        border: 1px solid #bbf7d0;
+        border-radius: 10px;
+        color: #166534;
+    }
+
+    .ket-qua h5 {
+        font-size: 16px;
+        font-weight: bold;
+        margin-bottom: 12px;
+    }
+
+    .diem-so {
+        font-size: 30px;
+        font-weight: bold;
+        margin: 5px 0;
+    }
+
+    .xep-loai {
+        font-size: 15px;
+        margin-top: 8px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="container-diem">
+
+    <h2>Tính điểm học phần</h2>
+
+    <p class="mo-ta">
+        Nhập điểm các thành phần để tính điểm tổng kết
+    </p>
+
+    <form method="POST" action="{{ url_for('tinh_diem') }}">
+
+        <div class="nhom-nhap">
+
+            <label for="cc">Điểm chuyên cần (10%)</label>
+
+            <input
+                type="text"
+                id="cc"
+                name="cc"
+                value="{{ cc }}"
+                placeholder="Nhập điểm chuyên cần"
+            >
+
+            <div class="ghi-chu">
+                Điểm từ 0 đến 10
+            </div>
+
+            {% if loi_cc %}
+                <div class="loi">{{ loi_cc }}</div>
+            {% endif %}
+
+        </div>
+
+        <div class="nhom-nhap">
+
+            <label for="gk">Điểm giữa kỳ (30%)</label>
+
+            <input
+                type="text"
+                id="gk"
+                name="gk"
+                value="{{ gk }}"
+                placeholder="Nhập điểm giữa kỳ"
+            >
+
+            <div class="ghi-chu">
+                Điểm từ 0 đến 10
+            </div>
+
+            {% if loi_gk %}
+                <div class="loi">{{ loi_gk }}</div>
+            {% endif %}
+
+        </div>
+
+        <div class="nhom-nhap">
+
+            <label for="ck">Điểm cuối kỳ (60%)</label>
+
+            <input
+                type="text"
+                id="ck"
+                name="ck"
+                value="{{ ck }}"
+                placeholder="Nhập điểm cuối kỳ"
+            >
+
+            <div class="ghi-chu">
+                Điểm từ 0 đến 10
+            </div>
+
+            {% if loi_ck %}
+                <div class="loi">{{ loi_ck }}</div>
+            {% endif %}
+
+        </div>
+
+        <button type="submit" class="nut-tinh">
+            Tính điểm học phần
+        </button>
+
+    </form>
+
+    {% if diem_hp is not none %}
+
+        <div class="ket-qua">
+
+            <h5>Kết quả học phần</h5>
+
+            <div>Điểm tổng kết</div>
+
+            <div class="diem-so">
+                {{ "%.1f"|format(diem_hp) }}
+            </div>
+
+            <div class="xep-loai">
+                Xếp loại:
+                <strong>{{ xep_loai }}</strong>
+            </div>
+
+        </div>
+
+    {% endif %}
+
+    <p class="chan-trang">
+        Công cụ tính điểm học phần
+    </p>
+
+</div>
+
+{% endblock %}
