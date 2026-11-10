@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -22,20 +21,30 @@
             min-height: 100vh;
         }
 
+        /* thanh menu: các link nằm giữa */
         .navbar-custom {
             background: #2563eb;
             padding: 15px 25px;
+            display: flex;
+            justify-content: center;
+            gap: 28px;
         }
 
         .navbar-custom a {
             color: white;
             text-decoration: none;
             font-weight: bold;
-            margin-right: 22px;
+            padding-bottom: 4px;
+            border-bottom: 3px solid transparent;
         }
 
         .navbar-custom a:hover {
             color: #dbeafe;
+        }
+
+        /* gạch dưới tên trang đang đứng */
+        .navbar-custom a.active {
+            border-bottom: 3px solid white;
         }
 
         .page-content {
@@ -125,11 +134,8 @@
 
             .navbar-custom {
                 padding: 12px;
-            }
-
-            .navbar-custom a {
-                display: inline-block;
-                margin: 5px 8px;
+                gap: 14px;
+                flex-wrap: wrap;
             }
         }
     </style>
@@ -140,10 +146,10 @@
 <body>
 
     <nav class="navbar-custom">
-        <a href="{{ url_for('menu') }}">Trang chủ</a>
-        <a href="{{ url_for('may_tinh') }}">Máy tính</a>
-        <a href="{{ url_for('tinh_diem') }}">Tính điểm</a>
-        <a href="{{ url_for('bmi') }}">BMI</a>
+        <a href="{{ url_for('menu') }}" class="{% if request.endpoint == 'menu' %}active{% endif %}">Trang chủ</a>
+        <a href="{{ url_for('may_tinh') }}" class="{% if request.endpoint == 'may_tinh' %}active{% endif %}">Máy tính</a>
+        <a href="{{ url_for('tinh_diem') }}" class="{% if request.endpoint == 'tinh_diem' %}active{% endif %}">Tính điểm</a>
+        <a href="{{ url_for('bmi') }}" class="{% if request.endpoint == 'bmi' %}active{% endif %}">BMI</a>
     </nav>
 
     <div class="page-content">
